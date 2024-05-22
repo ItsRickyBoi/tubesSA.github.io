@@ -102,19 +102,22 @@
             return s.substring(start, start + maxLength);
         }
 
-        function findLongestPalindromeDP(s) {
-            const canvas = document.getElementById('palindromeCanvasDP');
-            const ctx = canvas.getContext('2d');
-            const charWidth = canvas.width / s.length;
-            let n = s.length;
-            let dp = Array.from(Array(n), () => new Array(n).fill(false));
-            let maxLength = 1, start = 0;
-
-            // All single characters are palindromes
-            for (let i = 0; i < n; i++) {
-                dp[i][i] = true;
-                drawRectangle(ctx, i, i, charWidth, 'lightcoral', s[i]);
+        function findPalindrome() {
+                let inputString = document.getElementById('inputString').value;
+                // Validate that the input contains only alphabetic characters
+                if (!/^[a-zA-Z]+$/.test(inputString)) {
+                    alert("Input wrong, try again. Only alphabetic strings are allowed.");
+                    return;
+                }
+            
+                clearCanvas('palindromeCanvasBF');
+                clearCanvas('palindromeCanvasDP');
+                let resultBF = findLongestPalindromeBF(inputString);
+                let resultDP = findLongestPalindromeDP(inputString);
+                document.getElementById('resultBF').innerHTML = `Brute Force - Longest Palindrome: ${resultBF}`;
+                document.getElementById('resultDP').innerHTML = `Dynamic Programming - Longest Palindrome: ${resultDP}`;
             }
+
 
             // Check for two-character palindromes
             for (let i = 0; i < n - 1; i++) {
