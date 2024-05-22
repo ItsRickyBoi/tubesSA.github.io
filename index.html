@@ -104,8 +104,7 @@
 
         function findPalindrome() {
                 let inputString = document.getElementById('inputString').value;
-                // Validate that the input contains only alphabetic characters
-                if (!/^[a-zA-Z]+$/.test(inputString)) {
+                if (/[\d]/.test(inputString)) {
                     alert("Input wrong, try again. Only alphabetic strings are allowed.");
                     return;
                 }
