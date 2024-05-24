@@ -53,16 +53,29 @@
         function findPalindrome() {
             let inputString = document.getElementById('inputString').value;
             if (!/^[a-zA-Z]+$/.test(inputString)) { // Validates that the input contains only alphabetic characters
-                alert("Hanya menerima input berupa string.");
+                alert("Only alphabetical string inputs are accepted.");
                 return;
             }
             clearCanvas('palindromeCanvasBF');
             clearCanvas('palindromeCanvasDP');
+
+            // Start timing for brute force approach
+            const startBF = performance.now();
             let resultBF = findLongestPalindromeBF(inputString);
+            const endBF = performance.now();
+            const timeBF = endBF - startBF; // Calculate execution time
+
+            // Start timing for dynamic programming approach
+            const startDP = performance.now();
             let resultDP = findLongestPalindromeDP(inputString);
-            document.getElementById('resultBF').innerHTML = `Brute Force - Longest Palindrome: ${resultBF}`;
-            document.getElementById('resultDP').innerHTML = `Dynamic Programming - Longest Palindrome: ${resultDP}`;
+            const endDP = performance.now();
+            const timeDP = endDP - startDP; // Calculate execution time
+
+            // Display results in the webpage
+            document.getElementById('resultBF').innerHTML = `Brute Force - Longest Palindrome: ${resultBF} (Time: ${timeBF.toFixed(2)} ms)`;
+            document.getElementById('resultDP').innerHTML = `Dynamic Programming - Longest Palindrome: ${resultDP} (Time: ${timeDP.toFixed(2)} ms)`;
         }
+
         function clearCanvas(canvasId) {
             const canvas = document.getElementById(canvasId);
             const ctx = canvas.getContext('2d');
